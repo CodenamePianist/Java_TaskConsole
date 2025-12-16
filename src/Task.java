@@ -5,35 +5,22 @@ public abstract class Task {
 
     protected int taskId;
     protected String title;
-    private String description;
+    protected String description;
     private String completionStatus;
 
-    public Task(int taskId, String title, String description, String completionStatus) {
+    public Task(int taskId, String title, String description) {
         this.taskId = taskId;
         this.title = title;
         this.description = description;
         this.completionStatus = "incomplete";
     }
 
-    List<Object> taskList = new ArrayList<>();
-
-    public abstract void setTitle(String taskTitle);
-
-    public String getTitle() {
-        return title;
-    };
-    // So when a user creates a new task, it needs a title. It also needs a description. New tasks default with an incomplete status. Is there a way I can increment the taskId?
-
-    public void setDescription(String newDescription) {
-        if (newDescription.isEmpty()) {
-            System.out.println("A new task must have a description");
-        } else {
-        description = newDescription;
-        };
-    };
-
     public String getDescription() {
         return description;
+    };
+
+    public void setDescription(String newDescription){
+        description = newDescription;
     };
 
     public void markCompleted() {
@@ -45,5 +32,9 @@ public abstract class Task {
 
     };
 
-    public abstract void display(List<Object> tasks);
+    public String getStatus() {
+        return completionStatus;
+    };
+
+    public abstract String display();
 }
