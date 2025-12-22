@@ -37,4 +37,6 @@ public abstract class Task {
     };
 
     public abstract String display();
+
+    public abstract void showTasks(Task[] tasks);
 }

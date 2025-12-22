@@ -8,7 +8,14 @@ public class WorkTask extends Task {
     @Override
     public String display() {
         return "[WORK] " + title;
+    }
+
+    @Override
+    public void showTasks(Task[] tasks) {
+        for (Task task : tasks) {
+            if (task.title.contains("[WORK]")) {
+                System.out.println(task);
+            };
+        };
     };
-
-
 }
