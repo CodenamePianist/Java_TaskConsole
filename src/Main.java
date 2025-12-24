@@ -47,9 +47,9 @@ public class Main {
                 case 2:
                     System.out.println("Is this a personal or work task?");
                     do {
-                        System.out.println("Personal");
-                        System.out.println("Work");
-                        System.out.println("Would you like to return to the main menu?");
+                        System.out.println("Press 1 to create a Personal task.");
+                        System.out.println("Press 2 to create a Work task.");
+                        System.out.println("Press 3 to return to the main menu.");
 
                         subChoice = scanner.nextInt();
 
@@ -63,13 +63,17 @@ public class Main {
 
                                 System.out.println("Write a brief description for this task:");
                                 String newTaskDescription = scanner.nextLine();
+
                                 Task newTask = new PersonalTask(++idCount, newTaskTitle, newTaskDescription);
+
                                 Map<String, Object> taskMap = new HashMap<>();
                                 taskMap.put("title", newTask.title);
                                 taskMap.put("description", newTask.description);
                                 taskMap.put("id", newTask.taskId);
                                 taskMap.put("completion status", newTask.getStatus());
+
                                 taskList.add(taskMap);
+
                                 System.out.println(taskList);
                                 break;
                             case 2:
