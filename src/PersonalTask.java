@@ -5,7 +5,8 @@ public class PersonalTask extends Task{
 
     @Override
     public String display() {
-        return "[PERSONAL] " + title;
+        title = "[PERSONAL] " + title;
+        return title;
     }
 
     @Override
@@ -13,6 +14,8 @@ public class PersonalTask extends Task{
         for (Task task : tasks) {
             if (task.title.contains("[PERSONAL]")) {
                 System.out.println(task);
+            } else {
+                System.out.println("You have no personal tasks at this time.");
             };
         };
     }

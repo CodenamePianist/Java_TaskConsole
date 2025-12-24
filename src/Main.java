@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -14,13 +11,18 @@ public class Main {
         return names[randomIndex];
     };
 
+    // When a task is created, can it be stored as something similar to a Javascript object with key-value pairs?
+    // The closest thing I've found to this would be a hashmap, but I'm not sure if that will fulfill what I'm looking for
+    // Gotta do more research tomorrow
+    // Update: HASHMAP WORKS!!! Set the second argument to Object and that will allow me to have each value keep its type when it's created
+
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
         Scanner scanner = new Scanner(System.in);
         int choice;
         int subChoice;
-        List<Task> taskList = new ArrayList<>();
+        List<Map<String, Object>> taskList = new ArrayList<>();
         int idCount = 0;
         String assistant = randomName(managerNames);
         System.out.println("Welcome to Taskarella, your personal task manager! I'm " + assistant + ", your personal assistant. How can I help you today?" );
@@ -32,8 +34,9 @@ public class Main {
             System.out.println("5. Exit Task Manager");
 
             choice = scanner.nextInt();
-            subChoice = scanner.nextInt();
-            switch (choice){
+
+
+            switch (choice) {
                 case 1:
                     if (taskList.isEmpty()) {
                         System.out.println("You have no tasks at this time.");
@@ -47,9 +50,27 @@ public class Main {
                         System.out.println("Personal");
                         System.out.println("Work");
                         System.out.println("Would you like to return to the main menu?");
+
+                        subChoice = scanner.nextInt();
+
                         switch (subChoice) {
                             case 1:
-                                //Logic goes here to create a new personal task and add it to the taskList array list
+                                //Logic goes here to create a new personal task, put it in a hashmap, and add it to the taskList array list
+                                System.out.println("Enter task title:");
+                                String newTaskTitle = scanner.nextLine();
+
+                                scanner.nextLine();
+
+                                System.out.println("Write a brief description for this task:");
+                                String newTaskDescription = scanner.nextLine();
+                                Task newTask = new PersonalTask(++idCount, newTaskTitle, newTaskDescription);
+                                Map<String, Object> taskMap = new HashMap<>();
+                                taskMap.put("title", newTask.title);
+                                taskMap.put("description", newTask.description);
+                                taskMap.put("id", newTask.taskId);
+                                taskMap.put("completion status", newTask.getStatus());
+                                taskList.add(taskMap);
+                                System.out.println(taskList);
                                 break;
                             case 2:
                                 //Logic goes here to create a new work task and add it to the taskList array list
@@ -75,6 +96,15 @@ public class Main {
         } while (choice != 5);
 
         scanner.close();
+
+//        Map<String, Object> taskMap = new HashMap<>();
+//        Task newTask = new WorkTask(1, "Eat a cookie", "Get a chocolate chip cookie and devour it");
+//        taskMap.put("title", newTask.title);
+//        taskMap.put("description", newTask.description);
+//        taskMap.put("id", newTask.taskId);
+//        taskMap.put("completion status", newTask.getStatus());
+//
+//        System.out.println(taskMap);
 
     }
 }
