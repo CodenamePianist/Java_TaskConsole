@@ -57,27 +57,46 @@ public class Main {
                             case 1:
                                 //Logic goes here to create a new personal task, put it in a hashmap, and add it to the taskList array list
                                 System.out.println("Enter task title:");
-                                String newTaskTitle = scanner.nextLine();
+                                String newPersonalTaskTitle = scanner.nextLine();
 
                                 scanner.nextLine();
 
                                 System.out.println("Write a brief description for this task:");
-                                String newTaskDescription = scanner.nextLine();
+                                String newPersonalTaskDescription = scanner.nextLine();
 
-                                Task newTask = new PersonalTask(++idCount, newTaskTitle, newTaskDescription);
+                                Task newPersonalTask = new PersonalTask(++idCount, newPersonalTaskTitle, newPersonalTaskDescription);
 
-                                Map<String, Object> taskMap = new HashMap<>();
-                                taskMap.put("title", newTask.title);
-                                taskMap.put("description", newTask.description);
-                                taskMap.put("id", newTask.taskId);
-                                taskMap.put("completion status", newTask.getStatus());
+                                Map<String, Object> personalTaskMap = new HashMap<>();
+                                personalTaskMap.put("title", newPersonalTask.title);
+                                personalTaskMap.put("description", newPersonalTask.description);
+                                personalTaskMap.put("id", newPersonalTask.taskId);
+                                personalTaskMap.put("completion status", newPersonalTask.getStatus());
 
-                                taskList.add(taskMap);
+                                taskList.add(personalTaskMap);
 
                                 System.out.println(taskList);
                                 break;
                             case 2:
-                                //Logic goes here to create a new work task and add it to the taskList array list
+                                //Logic goes here to create a new work task, put it in a hashmap, and add it to the taskList array list
+                                System.out.println("Enter task title:");
+                                String newWorkTaskTitle = scanner.nextLine();
+
+                                scanner.nextLine();
+
+                                System.out.println("Write a brief description for this task:");
+                                String newWorkTaskDescription = scanner.nextLine();
+
+                                Task newWorkTask = new WorkTask(++idCount, newWorkTaskTitle, newWorkTaskDescription);
+
+                                Map<String, Object> workTaskMap = new HashMap<>();
+                                workTaskMap.put("title", newWorkTask.title);
+                                workTaskMap.put("description", newWorkTask.description);
+                                workTaskMap.put("id", newWorkTask.taskId);
+                                workTaskMap.put("completion status", newWorkTask.getStatus());
+
+                                taskList.add(workTaskMap);
+
+                                System.out.println(taskList);
                                 break;
                             case 3:
                                 System.out.println("Returning to the main menu.");
