@@ -22,7 +22,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int choice;
         int subChoice;
-        List<Map<String, Object>> taskList = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
         int idCount = 0;
         String assistant = randomName(managerNames);
         System.out.println("Welcome to Taskarella, your personal task manager! I'm " + assistant + ", your personal assistant. How can I help you today?" );
@@ -41,7 +41,10 @@ public class Main {
                     if (taskList.isEmpty()) {
                         System.out.println("You have no tasks at this time.");
                     } else {
-                        System.out.println(taskList);
+//                        System.out.println(taskList);
+                        for (Task task : taskList) {
+                            System.out.println(task);
+                        };
                     };
                     break;
                 case 2:
@@ -56,45 +59,35 @@ public class Main {
                         switch (subChoice) {
                             case 1:
                                 //Logic goes here to create a new personal task, put it in a hashmap, and add it to the taskList array list
+                                scanner.nextLine();
+
                                 System.out.println("Enter task title:");
                                 String newPersonalTaskTitle = scanner.nextLine();
-
-                                scanner.nextLine();
 
                                 System.out.println("Write a brief description for this task:");
                                 String newPersonalTaskDescription = scanner.nextLine();
 
                                 Task newPersonalTask = new PersonalTask(++idCount, newPersonalTaskTitle, newPersonalTaskDescription);
+                                newPersonalTask.display();
 
-                                Map<String, Object> personalTaskMap = new HashMap<>();
-                                personalTaskMap.put("title", newPersonalTask.title);
-                                personalTaskMap.put("description", newPersonalTask.description);
-                                personalTaskMap.put("id", newPersonalTask.taskId);
-                                personalTaskMap.put("completion status", newPersonalTask.getStatus());
-
-                                taskList.add(personalTaskMap);
+                                taskList.add(newPersonalTask);
 
                                 System.out.println(taskList);
                                 break;
                             case 2:
                                 //Logic goes here to create a new work task, put it in a hashmap, and add it to the taskList array list
+                                scanner.nextLine();
+
                                 System.out.println("Enter task title:");
                                 String newWorkTaskTitle = scanner.nextLine();
-
-                                scanner.nextLine();
 
                                 System.out.println("Write a brief description for this task:");
                                 String newWorkTaskDescription = scanner.nextLine();
 
                                 Task newWorkTask = new WorkTask(++idCount, newWorkTaskTitle, newWorkTaskDescription);
+                                newWorkTask.display();
 
-                                Map<String, Object> workTaskMap = new HashMap<>();
-                                workTaskMap.put("title", newWorkTask.title);
-                                workTaskMap.put("description", newWorkTask.description);
-                                workTaskMap.put("id", newWorkTask.taskId);
-                                workTaskMap.put("completion status", newWorkTask.getStatus());
-
-                                taskList.add(workTaskMap);
+                                taskList.add(newWorkTask);
 
                                 System.out.println(taskList);
                                 break;
@@ -107,8 +100,47 @@ public class Main {
                     } while (subChoice != 3);
                     break;
                 case 3:
+                    //Logic will go here to update an existing task. Remember, only descriptions can be updated here.
+                    scanner.nextLine();
+
+                    if (taskList.isEmpty()) {
+                        System.out.println("You have no tasks to update at this time.");
+                    } else {
+                        System.out.println("Enter the ID number for the task you would like to update:");
+                        for (Task task: taskList) {
+                            System.out.println(task);
+                        };
+                        int idNumber = scanner.nextInt();
+                        for (Task task: taskList) {
+                            if (task.taskId == idNumber) {
+                                scanner.nextLine();
+                                System.out.println("Please enter the updated description.");
+                                String updatedDescription = scanner.nextLine();
+                                task.setDescription(updatedDescription);
+                                System.out.println(task);
+                            };
+                        };
+                    };
                     break;
                 case 4:
+                    //Logic will go here to mark a task as completed. This should be pretty similar to updating the description
+                    scanner.nextLine();
+
+                    if (taskList.isEmpty()) {
+                        System.out.println("You have no tasks to mark as complete at this time.");
+                    };
+
+                    System.out.println("Enter the ID number of the task you have completed:");
+                    for (Task task: taskList) {
+                        System.out.println(task);
+                    };
+                    int completedTaskId = scanner.nextInt();
+                    for (Task task: taskList) {
+                        if (task.taskId == completedTaskId) {
+                            task.markCompleted();
+                            System.out.println("Nice job completing task number " + task.taskId + "!");
+                        };
+                    };
                     break;
                 case 5:
                     System.out.println("Thank you for using Taskarella, we hope to see you again!");

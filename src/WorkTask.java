@@ -7,18 +7,7 @@ public class WorkTask extends Task {
 
     @Override
     public String display() {
-        title = "[WORK]" + title;
+        title = "[WORK] " + title;
         return title;
     }
-
-    @Override
-    public void showTasks(Task[] tasks) {
-        for (Task task : tasks) {
-            if (task.title.contains("[WORK]")) {
-                System.out.println(task);
-            } else {
-                System.out.println("You have no work tasks at this time.");
-            };
-        };
-    };
 }

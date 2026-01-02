@@ -20,7 +20,7 @@ public abstract class Task {
     };
 
     public void setDescription(String newDescription){
-        description = newDescription;
+            description = newDescription;
     };
 
     public void markCompleted() {
@@ -38,5 +38,14 @@ public abstract class Task {
 
     public abstract String display();
 
-    public abstract void showTasks(Task[] tasks);
+    @Override
+    public String toString() {
+        return "{ " +
+                "title = " + title +
+                ", description = " + description +
+                ", id = " + taskId +
+                ", completion status = " + getStatus() +
+                " }";
+    }
+
 }
